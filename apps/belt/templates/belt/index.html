@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        {% load staticfiles %}
+        <!--Bootstrap css -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <!-- user static -->
+        <link rel="stylesheet" href="{% static 'belt/css/style.css' %}" media="screen" title="no title"  charset="utf-8">
+        <title>Belt</title>
+    </head>
+    <body>
+        <h1>Welcome!</h1>
+        <div class="border">
+            <form action='/register' method="POST">
+                <h3>Register:</h3>
+                {% csrf_token %}
+                <p>Name:</p>
+                <input type="text" name="name">
+                <p>Username:</p>
+                <input type="text" name="username">
+                <p>Password</p>
+                <input type="text" name="password">
+                <p>*Password should be at least 8 characters
+                <p>Confirm PW.</p>
+                <input type="text" name="password_conf">
+                <input type="submit" value="Register">
+            </form>
+        </div>
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <div class="border">
+            <h2>Login</h2>
+            <form action="/login" method="POST">
+                {% csrf_token %}
+                <p>Username:</p>
+                <input type="text" name="r_username">
+                <p>Password:</p>
+                <input type="text" name="r_password">
+                <input type="submit" value="Login">
+            </form>
+        </div>
+
+    </body>
+</html>
